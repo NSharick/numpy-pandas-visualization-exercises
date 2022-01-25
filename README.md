@@ -1,0 +1,1 @@
+This repository is for numpy, pandas, and visualiztions exercises.
