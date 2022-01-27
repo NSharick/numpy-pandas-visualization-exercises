@@ -96,7 +96,7 @@ fruits.value_counts().nsmallest(n= 11)
 
 #the best way to run it is like this:
 fruits.value_counts().nsmallest(n= 1, keep= 'all')
-#the 'keep = all' returns all the valuse if there are duplicates - in this case there were 11 fruits with only one occurrence
+#the 'keep = all' returns all the values if there are duplicates - in this case there were 11 fruits with only one occurrence
 
 
 
@@ -133,22 +133,25 @@ fruits.str.count('a')
 #16    3
 #dtype: int64
 
+
 #3 -- Output the number of vowels in each and every string value
 fruits.str.count('a', 'e', 'i', 'o', 'u') #Does not work because of too many arguments
-
 #works but long
 fruits.str.count('a') + fruits.str.count('e') + fruits.str.count('i') + fruits.str.count('o') + fruits.str.count('u')
-
 #best way!
 fruits.str.count('[aeiou]')
+
 
 #4 Write the code to get the longest string value from fruits
 fruits.str.len().max()
 #returns the length of the longest string in the series -- 16
-[max(fruits, key= len)]
+max(fruits, key= len)
 #returns the value of the longest string -- ['honeycrisp apple']
 
+
 #5 -- Write the code to get the string values with 5 or more letters in the name
+fruits.str.len() >= 5
+#this will return the string of booleans and wrapping it with the series name and the brackes will return the values from the series.
 fruits[fruits.str.len() >= 5]
 #returns --
 #1                mango
@@ -168,15 +171,16 @@ fruits[fruits.str.len() >= 5]
 
 
 #6 -- Use the .apply method with a lambda function to find the fruit(s) containing the letter "o" two or more times.
-fruits.apply(lambda fruit: fruit.count('o') > 2)
+fruits.apply(lambda f: f.count('o') > 2)
 #returns all false because there are not any values with more than 2 'o
-fruits.apply(lambda fruit: fruit.count('o') > 1)
+fruits.apply(lambda f: f.count('o') > 1)
 #returns 2 'true'
-fruits[fruits.apply(lambda fruit: fruit.count('o') > 1)]
+fruits[fruits.apply(lambda f: f.count('o') > 1)]
 #returns the two values with more than on 'o'
 #6         tomato
 #15    gooseberry
 #dtype: object
+
 
 #7 -- Write the code to get only the string values containing the substring "berry"
 fruits[fruits.str.contains('berry')]
@@ -214,12 +218,14 @@ print(letters)
 
 #1 -- Which letter occurs the most frequently in the letters Series?
 letters.value_counts()
+#returns the counts for each nuique value
 
 x = letters.value_counts()
 [x.nlargest(n= 1)]
 #or
 letters.value_counts().nlargest(n= 1)
 #returns 'y 13'
+
 
 #2 -- Which letter occurs the Least frequently?
 x = letters.value_counts()
@@ -228,11 +234,11 @@ x = letters.value_counts()
 letters.value_counts().nsmallest(n= 1)
 #returns 'l 4'
 
+
 #3 -- How many vowels are in the Series?
 sum(letters.str.count('[aeiou]'))
 #returns -- 34
-
-#best practice to chain the sum() onto the call
+#best practice to chain the sum() onto the statement rather than wrap it around the statement
 letters.str.count('[aeiou]').sum()
 
 
@@ -241,9 +247,11 @@ letters.str.count('[^aeiou]').sum()
 #the '^' works as a 'not'
 #returns 166
 
+
 #5 -- Create a Series that has all of the same letters but uppercased
 letters.str.upper()
 #returns all strings in uppercase
+
 
 #6 -- Create a bar plot of the frequencies of the 6 most commonly occuring letters
 letters.value_counts().head(6)
@@ -251,5 +259,36 @@ letters.value_counts().head(6)
 six_most = letters.value_counts().head()
 #assigns a variable to the above data
 
+
+
+
+
+
+
+
+
+
+
+
+##Part 2 #########
+
+numbers = pd.Series(['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23'])
+print(numbers)
+
+#1 -- What is the data type of the numbers Series?
+
+#2 -- How many elements are in the number Series?
+
+#3 -- Perform the necessary manipulations by accessing Series attributes and methods to convert the numbers Series to a numeric data type.
+
+#4 -- Run the code to discover the maximum value from the Series.
+
+#5 -- Run the code to discover the minimum value from the Series.
+
+#6 -- What is the range of the values in the Series?
+
+#7 -- Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
+
+#8 -- Plot the binned data in a meaningful way. Be sure to include a title and axis labels.#
 
 
