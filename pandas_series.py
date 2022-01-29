@@ -254,40 +254,59 @@ letters.str.upper()
 
 
 #6 -- Create a bar plot of the frequencies of the 6 most commonly occuring letters
+import matplotlib as plt
+
 letters.value_counts().head(6)
 #pulls the six most frequently occurring strings from the series
 six_most = letters.value_counts().head()
 #assigns a variable to the above data
+six_most.plot(kind= 'barh', color= 'green')
+plt.pyplot.title('Six Most Commonly Occurring Letters')
 
 
+####################
 
 
-
-
-
-
-
-
-
-
-##Part 2 #########
-
-numbers = pd.Series(['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23'])
+number_list = ['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23']
+numbers = pd.Series(number_list)
 print(numbers)
 
 #1 -- What is the data type of the numbers Series?
+numbers.dtype
+#returns -- dtype('O')
+
 
 #2 -- How many elements are in the number Series?
+numbers.size
+#returns -- 20
+
 
 #3 -- Perform the necessary manipulations by accessing Series attributes and methods to convert the numbers Series to a numeric data type.
+#remove the '$' and the commas the change the data type to float
+nums = numbers.str.replace('$', '').str.replace(',', '').astype('float')
+#verify the return values and the return data type
+print(nums)
+nums.dtype
+
 
 #4 -- Run the code to discover the maximum value from the Series.
+nums.max()
+#returns 4789988.17
+
 
 #5 -- Run the code to discover the minimum value from the Series.
+nums.min()
+#returns 278.6
+
 
 #6 -- What is the range of the values in the Series?
+nums.index
+#returns -- RangeIndex(start=0, stop=20, step=1)
+
 
 #7 -- Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
+
+
 
 #8 -- Plot the binned data in a meaningful way. Be sure to include a title and axis labels.#
 
