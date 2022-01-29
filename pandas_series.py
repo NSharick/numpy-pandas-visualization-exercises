@@ -305,9 +305,97 @@ nums.index
 
 
 #7 -- Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
+pd.cut(nums, 4)
+#returns --
+#0        (-4511.11, 1197705.993]
+#1        (-4511.11, 1197705.993]
+#2        (-4511.11, 1197705.993]
+#3      (3592560.778, 4789988.17]
+#4     (1197705.993, 2395133.385]
+#5     (1197705.993, 2395133.385]
+#6        (-4511.11, 1197705.993]
+#7     (1197705.993, 2395133.385]
+#8      (3592560.778, 4789988.17]
+#9     (2395133.385, 3592560.778]
+#10       (-4511.11, 1197705.993]
+#11     (3592560.778, 4789988.17]
+#12     (3592560.778, 4789988.17]
+#13    (2395133.385, 3592560.778]
+#14    (1197705.993, 2395133.385]
+#15     (3592560.778, 4789988.17]
+#16     (3592560.778, 4789988.17]
+#17    (2395133.385, 3592560.778]
+#18       (-4511.11, 1197705.993]
+#19       (-4511.11, 1197705.993]
+#dtype: category
+#Categories (4, interval[float64, right]): [(-4511.11, 1197705.993] < (1197705.993, 2395133.385] < (2395133.385, 3592560.778] < (3592560.778, 4789988.17]]
 
+#group and sort the binned values and assign it to a variable
+bin_nums = pd.cut(nums, 4).value_counts().sort_index()
+print(bin_nums)
+#returns --
+#(-4511.11, 1197705.993]       7
+#(1197705.993, 2395133.385]    4
+#(2395133.385, 3592560.778]    3
+#(3592560.778, 4789988.17]     6
+#dtype: int64
 
 
 #8 -- Plot the binned data in a meaningful way. Be sure to include a title and axis labels.#
 
+#plot the above bunned values
+bin_nums.plot(kind= 'barh', color= 'red')
+plt.pyplot.xlabel('numbers in group')
+plt.pyplot.ylabel('group value range')
+plt.pyplot.title('$ value in four groups')
 
+
+############################
+
+examscores = [60, 86, 75, 62, 93, 71, 60, 83, 95, 78, 65, 72, 69, 81, 96, 80, 85, 92, 82, 78]
+exam_scores = pd.Series(examscores)
+
+#1 - How many elements are in the exam_scores Series?
+exam_scores.size
+#returns -- 20
+
+
+#2 - Run the code to discover the minimum, the maximum, the mean, and the median scores for the exam_scores Series.
+exam_scores.describe()
+#returns -- 
+#count    20.000000
+#mean     78.150000
+#std      11.352139
+#min      60.000000
+#25%      70.500000
+#50%      79.000000
+#75%      85.250000
+#max      96.000000
+#dtype: float64
+
+exam_scores.min()
+#returns -- 60
+exam_scores.max()
+#returns -- 96
+exam_scores.mean()
+#returns -- 78.15
+exam_scores.median()
+#returns -- 79.0
+
+
+#3 - Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
+#bin the values by standard letter grade ranges then count the values in each range and sort by the index
+bin_scores = pd.cut(exam_scores, [50, 60, 70, 80, 90, 100]).value_counts().sort_index()
+#plot the binned values on a bar graph
+bin_scores.plot(kind= 'barh', color= 'blue')
+#add titles
+plt.pyplot.title('Exam Grades')
+plt.pyplot.xlabel('number of students')
+plt.pyplot.ylabel('grade range')
+
+
+#4 - Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. Add the necessary points to the highest grade to make it 100, and add the same number of points to every other score in the Series as well.
+
+#5 - Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
+
+#6 - Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
