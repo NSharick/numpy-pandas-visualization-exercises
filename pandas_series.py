@@ -384,9 +384,16 @@ exam_scores.median()
 
 
 #3 - Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
+#plot the original exam scores in a histogram to show overall score distribution
+exam_scores.plot.hist(color= 'blue')
+#add titles
+plt.pyplot.title('Exam Grades')
+plt.pyplot.ylabel('number of students')
+plt.pyplot.xlabel('grade range')
+
 #bin the values by standard letter grade ranges then count the values in each range and sort by the index
 bin_scores = pd.cut(exam_scores, [50, 60, 70, 80, 90, 100]).value_counts().sort_index()
-#plot the binned values on a bar graph
+#plot the binned values in a bar graph
 bin_scores.plot(kind= 'barh', color= 'blue')
 #add titles
 plt.pyplot.title('Exam Grades')
@@ -395,7 +402,24 @@ plt.pyplot.ylabel('grade range')
 
 
 #4 - Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. Add the necessary points to the highest grade to make it 100, and add the same number of points to every other score in the Series as well.
+#find the curve value
+curvegrade = 100 - exam_scores.max()
+print(curvegrade)
+#make a list of the grades with a curve
+curve_grades = exam_scores + curvegrade
+print(curve_grades)
+
 
 #5 - Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
+bin_curve_scores = pd.cut(curve_grades, [50, 60, 70, 80, 90, 100]).value_counts().sort_index()
+print(bin_curve_scores)
+
 
 #6 - Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
+#plot the binned cureved grades
+bin_curve_scores.plot(kind= 'barh', color= 'green')
+#add titles
+plt.pyplot.title('Exam Grades With Curve')
+plt.pyplot.xlabel('number of students')
+plt.pyplot.ylabel('grade range')
+
